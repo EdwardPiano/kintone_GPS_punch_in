@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google Map</title>
+  </head>
+  <style>
+    #map {
+      width: 100%;
+      height: 40vh;
+    }
+    body {
+      margin: 0px;
+      padding: 0px;
+    }
+  </style>
+  <body>
+    <div id="map"></div>
+  </body>
+</html>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrilHOKb6m1eFByHq7INOsfUx0JO5-nQk"></script>
+
+<script>
+  //https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyDZSxQFH9_MHJu0mMaJUiSMKMDAAYApqO0
+  //AIzaSyA1b0-NvcUvWXQMyID8ll25RnaQ7XYuAAc
+  //Google map 安裝
+  let map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 0, lng: 0},
+    zoom: 0,
+  });
+
+  var geocoder = new google.maps.Geocoder();
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      };
+      // google.maps.LatLng 物件
+      const coord = new google.maps.LatLng(
+        position.coords.latitude,
+        position.coords.longitude
+      );
+
+      // 傳入 latLng 資訊至 geocoder.geocode
+      geocoder.geocode({latLng: coord}, function (results, status) {
+        if (status === google.maps.GeocoderStatus.OK) {
+          // 如果有資料就會回傳
+          if (results) {
+            console.log(results[0]);
+            const marker = new google.maps.Marker({
+              position: pos,
+              title: String(results[0].formatted_address),
+              draggable: true,
+            });
+
+            const popupContent = new google.maps.InfoWindow();
+            google.maps.event.addListener(
+              marker,
+              'click',
+              (function (marker) {
+                return function () {
+                  popupContent.setContent(results[0].formatted_address);
+                  popupContent.open(map, marker);
+                };
+              })(marker)
+            );
+            marker.setMap(map);
+            map.setCenter(pos);
+            map.setZoom(19);
+            google.maps.event.trigger(marker, 'click', {}); //啟動後自動顯示當前地址
+          }
+        }
+        // 經緯度資訊錯誤
+        else {
+          alert('Reverse Geocoding failed because: ' + status);
+        }
+      });
+    });
+  }
+</script>

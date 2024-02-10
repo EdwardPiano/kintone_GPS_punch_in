@@ -1,0 +1,66 @@
+{
+  "manifest_version": 1,
+  "version": 1,
+  "type": "APP",
+  "desktop": {
+    "js": [
+      "https://js.cybozu.com/jquery/3.3.1/jquery.min.js",
+      "https://unpkg.com/@kintone/rest-api-client@3.1.2/umd/KintoneRestAPIClient.min.js",
+      "js/sweetalert2.min.js",
+      "js/moment-with-locales.js",
+      "js/desktop.js",
+      "js/UIsetting.js"
+    ],
+    "css": [
+      "css/51-modern-default.css",
+      "css/sweetalert2.min.css",
+      "css/desktop.css"
+    ]
+  },
+  "icon": "image/punch.png",
+  "config": {
+    "html": "html/config.html",
+    "js": [
+      "https://js.cybozu.com/jquery/3.3.1/jquery.min.js",
+      "https://unpkg.com/@kintone/rest-api-client@3.1.2/umd/KintoneRestAPIClient.min.js",
+      "js/sweetalert2.min.js",
+      "js/config.js"
+    ],
+    "css": [
+      "css/51-modern-default.css",
+      "css/sweetalert2.min.css",
+      "css/config.css"
+    ],
+    "required_params": [
+      "punchUser",
+      "punchDate",
+      "punchInTime",
+      "punchInLocation",
+      "punchOutTime",
+      "punchOutLocation",
+      "GoogleToken",
+      "listID"
+    ]
+  },
+  "name": {
+    "en": "GPS-Punch",
+    "ja": "GPS打刻",
+    "zh": "GPS打卡"
+  },
+  "description": {
+    "en": "GPS-Punch【PC GPS position is not precise】",
+    "ja": "GPS打刻【パソコン版は居場所の指定は不安定】",
+    "zh": "GPS打卡【電腦版定位不準確】"
+  },
+  "mobile": {
+    "js": [
+      "https://js.cybozu.com/jquery/3.3.1/jquery.min.js",
+      "https://unpkg.com/@kintone/rest-api-client@3.1.2/umd/KintoneRestAPIClient.min.js",
+      "js/sweetalert2.min.js",
+      "js/moment-with-locales.js",
+      "js/mobile.js",
+      "js/UIsetting.js"
+    ],
+    "css": ["css/mobile.css", "css/sweetalert2.min.css"]
+  }
+}
